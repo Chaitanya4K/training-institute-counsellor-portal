@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Enquiry Form</title>
+
+<link
+	href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css"
+	rel="stylesheet">
+
+<style>
+body {
+	background-color: rgb(0, 128, 255);
+}
+
+.sidebar {
+	min-height: 100vh;
+	background-color: #1e293b;
+}
+
+.sidebar a {
+	color: #cbd5e1;
+	display: block;
+	padding: 12px;
+	text-decoration: none;
+}
+
+.sidebar a:hover {
+	background-color: #334155;
+	color: white;
+}
+
+.topbar {
+	background: rgb(28, 255, 128);;
+	padding: 10px;
+	box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+.card {
+	border-radius: 12px;
+	box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+	border: none;
+}
+</style>
+</head>
+
+<body>
+
+	<div class="container-fluid">
+		<div class="row">
+
+			<!-- Sidebar -->
+			<div class="col-md-2 sidebar text-white">
+				<h4 class="p-3">Portal</h4>
+				<a th:href="@{/dashboard}">Dashboard</a> <a th:href="@{/enquiry}">Add
+					Enquiry</a> <a th:href="@{/view-enquiries}">View Enquiries</a> <a
+					th:href="@{/logout}" class="text-danger">Logout</a>
+			</div>
+
+			<!-- Main Content -->
+			<div class="col-md-10 p-4">
+
+				<div class="topbar mb-4 d-flex justify-content-between">
+					<h5>Enquiry Form</h5>
+				</div>
+
+				<div class="card p-4">
+
+					<div th:if="${emsg}" class="alert alert-danger">
+						<p th:text="${emsg}"></p>
+					</div>
+
+					<div th:if="${smsg}" class="alert alert-success">
+						<p th:text="${smsg}"></p>
+					</div>
+
+					<form th:action="@{/addEnq}" th:object="${enquiry}" method="post">
+
+						<input type="hidden" th:field="*{enquiryId}" />
+
+						<div class="row">
+							<div class="col-md-6">
+								<input class="form-control mb-3" placeholder="Student Name"
+									th:field="*{studentName}">
+							</div>
+
+							<div class="col-md-6">
+								<input class="form-control mb-3" placeholder="Phone Number"
+									th:field="*{phno}">
+							</div>
+						</div>
+
+						<select class="form-control mb-3" th:field="*{courseName}">
+							<option value="">Select Course</option>
+							<option value="Java">Java</option>
+							<option value="Python">Python</option>
+							<option value="AWS">AWS</option>
+							<option value="Generic AI">Generic AI</option>
+							<option value="JRTP">JRTP</option>
+							<option value="SBMS">SBMS</option>
+							
+						</select> <select class="form-control mb-3" th:field="*{classMode}">
+							<option value="">Select Mode</option>
+							<option value="Online">Online</option>
+							<option value="Classroom">Classroom</option>
+							
+						</select> <select class="form-control mb-3" th:field="*{status}">
+							<option value="">Select Status</option>
+							<option value="Open">Open</option>
+							<option value="Enrolled">Enrolled</option>
+							<option value="Lost">Lost</option>
+						</select>
+
+						<button class="btn btn-primary">Save</button>
+
+					</form>
+
+				</div>
+
+			</div>
+		</div>
+	</div>
+
+</body>
+</html>

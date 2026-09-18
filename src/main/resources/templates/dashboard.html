@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link
+	href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css"
+	rel="stylesheet">
+<link href="https://getbootstrap.com/docs/5.3/assets/css/docs.css"
+	rel="stylesheet">
+<title>Dashboard</title>
+<script defer
+	src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js"></script>
+<head>
+<meta charset="ISO-8859-1">
+
+<style>
+body {
+	background-color: rgb(0, 128, 255);
+}
+
+.navbar {
+	background-color: #343a40;
+}
+
+.navbar a {
+	color: white !important;
+}
+
+.sidebar {
+	height: 100vh;
+	background-color: #1e293b;
+	color: white;
+}
+
+.sidebar a {
+	color: #cbd5e1;
+	display: block;
+	padding: 12px;
+	text-decoration: none;
+}
+
+.sidebar a:hover {
+	background-color: #334155;
+	color: white;
+}
+
+.topbar {
+	background-color: rgb(28, 255, 128);
+	padding: 10px;
+	box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+.card {
+	border-radius: 12px;
+	border: none;
+	box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+}
+</style>
+</head>
+<body>
+
+	<div class="container-fluid">
+		<div class="row">
+
+			<!-- Sidebar -->
+			<div class="col-md-2 sidebar">
+				<h4 class="p-3">Portal</h4>
+
+				<a th:href="@{/dashboard}">Dashboard</a> <a th:href="@{/enquiry}">Add
+					Enquiry</a> <a th:href="@{/view-enquiries}">View Enquiries</a> <a
+					th:href="@{/logout}" class="text-danger">Logout</a>
+			</div>
+
+			<!-- Main Content -->
+			<div class="col-md-10">
+
+				<!-- Topbar -->
+				<div class="topbar mb-3 d-flex justify-content-between">
+					<h5>Dashboard</h5>
+					<span> Good <span
+						th:text="${#dates.format(#dates.createNow(),'a')=='AM'?'Morning':'Evening'}"></span>,
+						<b th:text="${name}"></b> 👋
+					</span>
+				</div>
+
+				<!-- Dashboard Cards -->
+				<div class="row">
+
+					<div class="col-md-3">
+						<div class="card p-3 text-center">
+							<h6>Total</h6>
+							<h4 th:text="${dashboardInfo.totalEnquiries}"></h4>
+						</div>
+					</div>
+
+					<div class="col-md-3">
+						<div class="card p-3 text-center">
+							<h6>Open Enquiries</h6>
+							<h4 th:text="${dashboardInfo.openEnquiries}"></h4>
+						</div>
+					</div>
+
+					<div class="col-md-3">
+						<div class="card p-3 text-center">
+							<h6>Enrolled Enquiries</h6>
+							<h4 th:text="${dashboardInfo.enrolledEnquiries}"></h4>
+						</div>
+					</div>
+
+					<div class="col-md-3">
+						<div class="card p-3 text-center">
+							<h6>Lost Enquiries</h6>
+							<h4 th:text="${dashboardInfo.lostEnquiries}"></h4>
+						</div>
+					</div>
+
+				</div>
+
+			</div>
+
+		</div>
+	</div>
+	<script
+		src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>
